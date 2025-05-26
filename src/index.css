@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Just+Another+Hand&family=Rock+Salt&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
+@theme {
+ --font-rocksalt: 'Rock Salt', cursive;
+ --font-bebas: 'Bebas Neue', cursive;
+ --font-JustAnotherHand: 'Just Another Hand', cursive;
+}
+
