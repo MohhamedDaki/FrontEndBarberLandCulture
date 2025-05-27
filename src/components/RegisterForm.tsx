@@ -215,8 +215,8 @@ export default function RegisterForm() {
     >
       <h2 className="text-2xl font-bold text-center mb-4 text-red-500 font-rocksalt">Registro</h2>
 
-      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-      {success && <p className="text-green-600 text-sm text-center">{success}</p>}
+      {error && <p className="text-red-500 text-md text-center">{error}</p>}
+      {success && <p className="text-green-600 text-md text-center">{success}</p>}
 
       {!codeSent && (
         <>

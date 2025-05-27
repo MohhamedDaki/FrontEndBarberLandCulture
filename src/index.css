@@ -3,9 +3,76 @@
 @import "tw-animate-css";
 
 
+
+
+
 @theme {
  --font-rocksalt: 'Rock Salt', cursive;
  --font-bebas: 'Bebas Neue', cursive;
  --font-JustAnotherHand: 'Just Another Hand', cursive;
+}
+
+/* TÍTULO DEL CALENDARIO */
+.fc .fc-toolbar-title {
+  @apply text-2xl font-bebas text-gray-800;
+}
+
+/* BOTONES DEL HEADER */
+.fc .fc-button {
+  @apply bg-red-600 text-white border-0 px-3 py-1 rounded-md text-sm hover:bg-red-700 transition-all duration-200 font-bebas;
+}
+
+.fc .fc-button-primary:disabled {
+  @apply opacity-50;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  @apply bg-red-900;
+}
+
+/* ENCABEZADO DE DÍAS */
+.fc .fc-col-header-cell {
+  @apply bg-gray-100 text-gray-700 text-sm font-semibold tracking-wide;
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply py-2 px-1 font-bebas;
+}
+
+/* EVENTOS */
+.fc .fc-daygrid-event,
+.fc .fc-timegrid-event {
+  @apply text-sm font-medium rounded-lg px-2 py-1 shadow-sm overflow-hidden;
+  white-space: normal !important; /* para evitar que se corten */
+}
+
+/* FONDO DE CADA COLUMNA DE DÍA */
+.fc .fc-daygrid-day-frame {
+  @apply bg-white hover:bg-gray-50 transition;
+}
+
+/* HORA DEL EJE Y ETIQUETAS */
+.fc .fc-timegrid-slot-label {
+  @apply text-xs text-gray-400;
+}
+
+.fc .fc-timegrid-axis-cushion {
+  @apply text-xs text-gray-400 px-1;
+}
+
+/* CELDAS DE HORARIOS */
+.fc .fc-timegrid-slot {
+  @apply border-gray-200;
+}
+
+/* BORDES DEL CALENDARIO */
+.fc-theme-standard .fc-scrollgrid {
+  border: none;
+}
+
+.fc-theme-standard td, 
+.fc-theme-standard th {
+  border-color: #e5e7eb; /* Tailwind gray-200 */
 }
 

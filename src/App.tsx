@@ -5,6 +5,11 @@ import Footer from "./components/Footer";
 import HomePage from "./HomePage";
 import RegisterPage from "./RegisterPage";
 import LoginPage from "./LoginPage";
+import ClienteDashboard from "./ClientDashboard";
+
+
+
+
 
 function App() {
   return (
@@ -15,6 +20,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard-cliente" element={<ClienteDashboard/>} />
         
       </Routes>
       

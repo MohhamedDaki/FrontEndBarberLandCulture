@@ -13,6 +13,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [ require('tailwindcss-animate')],
 };
 // This is a Tailwind CSS configuration file that specifies the content files to scan for class names,

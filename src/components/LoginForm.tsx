@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 interface FormData {
   email: string;
@@ -15,6 +17,10 @@ export default function RegisterForm() {
   const [token, settoken] = useState<String | null>(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  //Hook para la navegación
+  const navigate = useNavigate();
+
 
   // Maneja cambios en los inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,49 +44,68 @@ const validatePassword = (password: string) => {
 
   // Función que se ejecuta al enviar el formulario
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError("");
-    setSuccess("");
+  e.preventDefault();
+  setError("");
+  setSuccess("");
 
-    if (!formData.email || !formData.password) {
-      setError("Todos los campos son obligatorios.");
-      return;
-    }
+  if (!formData.email || !formData.password) {
+    setError("Todos los campos son obligatorios.");
+    return;
+  }
 
-    if(!validateEmail(formData.email)) {
-      setError("Correo electrónico inválido.");
-      return;
-    }
+  if (!validateEmail(formData.email)) {
+    setError("Correo electrónico inválido.");
+    return;
+  }
 
-    if(!validatePassword(formData.password)) {
-      setError("La contraseña debe tener al menos 8 caracteres.");
-      return;
-    }   
+  if (!validatePassword(formData.password)) {
+    setError("La contraseña debe tener al menos 8 caracteres.");
+    return;
+  }
 
-    try {
-      const payload = {
-        email: formData.email,
-        password: formData.password,
-      };
+  try {
+    const payload = {
+      email: formData.email,
+      password: formData.password,
+    };
 
-      const res = await fetch("https://localhost:7057/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+    const res = await fetch("https://localhost:7057/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-      if (!res.ok) throw new Error("Error al iniciar sesión");
+    if (!res.ok) throw new Error("Error al iniciar sesión");
 
-      const response = await res.json();
-      settoken(response.token);
-        localStorage.setItem("authToken", response.token);
-        
-      setSuccess("Inicio de sesión exitoso");
-    } catch (err) {
-      const error = err as Error;
-      setError(error.message);
-    }
-  };
+    const response = await res.json();
+    localStorage.setItem("authToken", response.token);
+    setSuccess("Inicio de sesión exitoso");
+
+    // Obtener los datos del usuario
+    const meRes = await fetch("https://localhost:7057/api/auth/me", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${response.token}`,
+      },
+    });
+
+    if (!meRes.ok) throw new Error("No se pudieron obtener los datos del usuario");
+    
+    const user = await meRes.json();
+   localStorage.setItem("user", JSON.stringify(user));
+
+
+    // Redirigir según el rol
+    if (user.role === "cliente") navigate("/dashboard-cliente");
+    else if (user.role === "barbero") navigate("/dashboard-barbero");
+    else if (user.role === "admin") navigate("/dashboard-admin");
+    else throw new Error("Rol no reconocido");
+  } catch (err) {
+    const error = err as Error;
+    setError(error.message);
+  }
+};
+
 
   return (
     <form
