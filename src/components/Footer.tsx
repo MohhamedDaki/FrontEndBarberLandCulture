@@ -5,10 +5,10 @@ import Bculture from "../assets/urban.jpg";
 export default function Footer() {
   return (
     <footer
-      className="py-12 text-center text-white bg-gray-900"
+      className="py-12 text-center text-white  bg-gray-900"
       style={{ backgroundImage: `url(${Bculture})`,  }}
     >
-      <div className="max-w-5xl mx-auto px-4">
+      <div className=" max-w-5xl mx-auto px-4">
         <h4 className="text-3xl font-rocksalt mb-3 text-red-500 uppercase tracking-widest">
           BarberlandCulture
         </h4>

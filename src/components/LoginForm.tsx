@@ -93,6 +93,7 @@ const validatePassword = (password: string) => {
     
     const user = await meRes.json();
    localStorage.setItem("user", JSON.stringify(user));
+   
 
 
     // Redirigir según el rol

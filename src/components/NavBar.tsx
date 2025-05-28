@@ -1,10 +1,19 @@
 import BarberLogo from "../assets/Barberlandlogo.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import CerrarSesion from "./BorrarLocal"
+import { useEffect, useState } from "react";
 
 
 export default function Navbar() {
   const navigate = useNavigate();
+
+  const [token, setToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    setToken(localStorage.getItem("authToken"));
+  }, []);
+
 
   const handleReservaClick = () => {
     const token = localStorage.getItem("authToken");
@@ -16,6 +25,8 @@ export default function Navbar() {
       navigate("/login");
     }
   };
+
+  
 
 
 
@@ -52,12 +63,19 @@ export default function Navbar() {
           </li>
         </ul>
 
+         {/* Mostrar botón solo si l token no existe */}
+        {token && (
+         
+          <CerrarSesion/>
+        )}
+
         <button type="button" onClick={handleReservaClick} className="text-white font-rocksalt text-lg hover:text-red-500  text-center inline-flex items-center ">
 Reserva
 <svg className="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
 </svg>
 </button>
+
 
 
       </div>

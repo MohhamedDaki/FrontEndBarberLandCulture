@@ -7,6 +7,8 @@ import Services from "./components/Services";
 import Testimonials from "./components/Testimonials";
 import Booking from "./components/Booking";
 
+import BorrarLocal  from "./components/BorrarLocal";
+
 export default function HomePage() {
   const location = useLocation();
 
@@ -27,6 +29,7 @@ export default function HomePage() {
       <Services />
       <Testimonials />
       <Booking />
+    
     </>
   );
 }

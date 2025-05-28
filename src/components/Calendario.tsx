@@ -5,7 +5,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useEffect, useState } from "react";
 
-import Fondo from "../assets/urban.jpg";
+
 
 
 import "../index.css"

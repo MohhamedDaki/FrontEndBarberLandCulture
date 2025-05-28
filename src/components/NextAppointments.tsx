@@ -65,9 +65,7 @@ export const CitasProximas = () => {
   return (
     <div>
       <h3 className="text-lg font-medium text-white mb-2 font-rocksalt">Tus próximas citas</h3>
-      {citas.length === 0 ? (
-        <p>No tienes citas próximas.</p>
-      ) : (
+     
         <>
           <div className="mb-6">
             <CalendarioCitas citas={citas} />
@@ -78,7 +76,7 @@ export const CitasProximas = () => {
         
           
         </>
-      )}
+     
     </div>
   );
 };

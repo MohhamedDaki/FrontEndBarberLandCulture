@@ -4,8 +4,6 @@
 
 
 
-
-
 @theme {
  --font-rocksalt: 'Rock Salt', cursive;
  --font-bebas: 'Bebas Neue', cursive;
@@ -43,7 +41,7 @@
 /* EVENTOS */
 .fc .fc-daygrid-event,
 .fc .fc-timegrid-event {
-  @apply text-sm font-medium rounded-lg px-2 py-1 shadow-sm overflow-hidden;
+  @apply text-sm font-medium rounded-xl px-2 py-1 shadow-sm overflow-hidden;
   white-space: normal !important; /* para evitar que se corten */
 }
 

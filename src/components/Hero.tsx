@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import Bculture from "../assets/bCulturehero.png";
+import BorrarLocal from "../components/BorrarLocal";
 
 export default function Hero() {
 
@@ -31,6 +32,7 @@ export default function Hero() {
           <h2 className="text-4xl text-red-500 md:text-6xl font-bold uppercase font-rocksalt">
             BarberlandCulture <span className="text-white ">Barbería</span>
           </h2>
+          
 
           <p className="mt-6  text-3xl font-JustAnotherHand">
             Estilo callejero. Precisión de elite.
