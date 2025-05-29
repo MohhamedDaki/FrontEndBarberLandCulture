@@ -99,7 +99,7 @@ const validatePassword = (password: string) => {
     // Redirigir según el rol
     if (user.role === "cliente") navigate("/dashboard-cliente");
     else if (user.role === "barbero") navigate("/dashboard-barbero");
-    else if (user.role === "admin") navigate("/dashboard-admin");
+    
     else throw new Error("Rol no reconocido");
   } catch (err) {
     const error = err as Error;

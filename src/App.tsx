@@ -7,6 +7,7 @@ import RegisterPage from "./RegisterPage";
 import LoginPage from "./LoginPage";
 import ClienteDashboard from "./ClientDashboard";
 import Reservas from "./Reservas";
+import BarberDashboard from "./BarberDashboard";
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/dashboard-cliente" element={<ClienteDashboard/>} />
         <Route path="/reservas" element={<Reservas/>} />
+        <Route path="/dashboard-barbero" element={<BarberDashboard/>} />
         
       </Routes>
       

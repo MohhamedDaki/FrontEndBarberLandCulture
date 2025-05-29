@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { SelectBarberoServicio } from "./SelectBarberoServicio";
 import { CalendarioDisponibilidad } from "./CalendarioDisponibilidad";
 import { useNavigate } from "react-router-dom";
+
+
 
 export const ReservarCita = () => {
     const navigate = useNavigate();
@@ -11,6 +13,8 @@ export const ReservarCita = () => {
   const [date, setDate] = useState("");
   const [eventos, setEventos] = useState([]);
   const [mensaje, setMensaje] = useState("");
+
+  
 
 
   const handleChange = (field: string, value: string) => {
@@ -30,6 +34,7 @@ export const ReservarCita = () => {
       setMensaje("No hay disponibilidad para la fecha seleccionada.");
     } else {
       setEventos(res.data);
+      console.log("Eventos:", res.data);
       setMensaje(""); // Limpia el mensaje si hay disponibilidad
     }
   } catch (error) {
@@ -38,6 +43,8 @@ export const ReservarCita = () => {
   }
     
   };
+
+  
 
   const handleSlotClick = async (slot: any) => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -53,18 +60,53 @@ export const ReservarCita = () => {
       status: "pendiente"
     };
 
-    await axios.post("https://localhost:7057/api/appointments", cita, {
+    try{
+
+    
+
+     await axios.post("https://localhost:7057/api/appointments", cita, {
       headers: { Authorization: `Bearer ${token}` }
     });
+
+     alert("Cita reservada con éxito");
+
+     
     //Refresa los eventos del calendar
     await fetchDisponibilidad();
 
     navigate("/dashboard-cliente");
-     
 
+} catch (error: unknown) {
+  console.error("Error reservando cita:", error);
 
-    alert("Cita reservada con éxito");
+    if (axios.isAxiosError(error)) {
+    if (error.response) {
+      if (error.response.status === 400) {
+        alert("Ya tienes una cita reservada para ese día");
+      } else if (error.response.status >= 500) {
+        alert("Error al reservar la cita. Inténtalo de nuevo.");
+      } else {
+        alert("Error inesperado: " + error.response.statusText);
+      }
+    } else {
+      alert("No se pudo conectar con el servidor.");
+    }
+  } else {
+    alert("Error inesperado");
+  }
+
+}
+
+   
+   
   };
+
+  useEffect(() => {
+  if (barberId && serviceId && date) {
+    fetchDisponibilidad();
+  }
+}, [barberId, serviceId, date]);
+
 
   return (
     <div className="p-6 max-w-md mx-auto bg-black border-1 border-white rounded-2xl shadow-md space-y-6">
@@ -84,7 +126,7 @@ export const ReservarCita = () => {
       className="w-full text-black bg-white font-JustAnotherHand text-2xl px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
     />
   </div>
-
+{/*
   <button
     disabled={!barberId || !serviceId || !date}
     onClick={fetchDisponibilidad}
@@ -96,6 +138,7 @@ export const ReservarCita = () => {
   >
     Ver disponibilidad
   </button>
+  */}
   {mensaje && (
   <div className="text-red-600 text-sm font-medium">{mensaje}</div>
 )}

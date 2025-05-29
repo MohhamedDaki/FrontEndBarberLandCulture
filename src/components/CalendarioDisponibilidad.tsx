@@ -2,17 +2,27 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 
 export const CalendarioDisponibilidad = ({ eventos, onSlotClick, fechaSeleccionada }: any) => {
+  const ahora = new Date();
+
+  
+ // Filtrar eventos cuyo inicio está en el futuro
+  const eventosFuturos = eventos.filter((evento: any) => {
+    const inicio = new Date(evento.start); // asegúrate de que evento.start es una fecha válida
+    return inicio > ahora;
+  });
+
   return (
     <FullCalendar
-        headerToolbar={false}
+      headerToolbar={false}
       plugins={[timeGridPlugin]}
       initialView="timeGridDay"
       initialDate={fechaSeleccionada}
       validRange={{ start: fechaSeleccionada, end: fechaSeleccionada }}
       allDaySlot={false}
       slotDuration="00:30:00"
-      events={eventos}
-      
+      events={eventosFuturos
+        
+      }  
       selectable={true}
       eventClick={(info) => {
         onSlotClick(info.event);
