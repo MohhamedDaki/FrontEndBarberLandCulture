@@ -7,8 +7,8 @@ export const SelectBarberoServicio = ({ onChange }: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const b = await axios.get("https://localhost:7057/api/users/barbers");
-      const s = await axios.get("https://localhost:7057/api/services");
+      const b = await axios.get("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/users/barbers");
+      const s = await axios.get("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/services");
       setBarberos(b.data);
       setServicios(s.data);
     };

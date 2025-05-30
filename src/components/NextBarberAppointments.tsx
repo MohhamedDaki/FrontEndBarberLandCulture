@@ -23,7 +23,7 @@ export const CitasProximas = () => {
     const token = localStorage.getItem("token");
 
     await axios.put(
-      `https://localhost:7057/api/appointments/status/${citaId}`,
+      `http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/appointments/status/${citaId}`,
       { status: nuevoEstado }, 
       {
         headers: {
@@ -56,7 +56,7 @@ export const CitasProximas = () => {
         const token = localStorage.getItem("token");
 
         const res = await axios.get(
-          `https://localhost:7057/api/appointments/barber/${user.id}`,
+          `http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/appointments/barber/${user.id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -66,10 +66,10 @@ export const CitasProximas = () => {
         const citasConNombres = await Promise.all(
           citasFiltradas.map(async (cita: Cita) => {
             const [barberRes, serviceRes] = await Promise.all([
-              axios.get(`https://localhost:7057/api/users/${cita.barberId}`, {
+              axios.get(`http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/users/${cita.barberId}`, {
                 headers: { Authorization: `Bearer ${token}` },
               }),
-              axios.get(`https://localhost:7057/api/services/${cita.serviceId}`, {
+              axios.get(`http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/services/${cita.serviceId}`, {
                 headers: { Authorization: `Bearer ${token}` },
               }),
             ]);

@@ -26,7 +26,7 @@ export const ReservarCita = () => {
     if (!barberId || !serviceId || !date) return;
      try {
     const res = await axios.get(
-      `https://localhost:7057/api/disponibility/${barberId}/availability`,
+      `http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/disponibility/${barberId}/availability`,
       { params: { date, serviceId } }
     );
     if (!res.data || res.data.length === 0) {
@@ -55,16 +55,16 @@ export const ReservarCita = () => {
       barberId: parseInt(barberId),
       serviceId: parseInt(serviceId),
       date: slot.startStr.split("T")[0],
-      startTime: slot.startStr.split("T")[1].substring(0, 5),
-      endTime: slot.endStr.split("T")[1].substring(0, 5),
+      startTime: slot.startStr.split("T")[1].substring(0, 8),
+      endTime: slot.endStr.split("T")[1].substring(0, 8),
       status: "pendiente"
     };
 
     try{
 
-    
+    console.log(cita);
 
-     await axios.post("https://localhost:7057/api/appointments", cita, {
+     await axios.post("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/appointments", cita, {
       headers: { Authorization: `Bearer ${token}` }
     });
 

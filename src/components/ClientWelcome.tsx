@@ -5,7 +5,7 @@ export const ClienteWelcome = () => {
   const [nombre, setNombre] = useState("");
 
   useEffect(() => {
-    axios.get("https://localhost:7057/api/auth/me", {
+    axios.get("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/auth/me", {
       headers: { Authorization: `Bearer ${localStorage.getItem("authToken")}` }
     })
     .then(res => {

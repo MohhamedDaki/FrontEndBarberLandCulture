@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import CerrarSesion from "./BorrarLocal"
 import { useEffect, useState } from "react";
+import {ClienteWelcome} from "./ClientWelcome";
 
 
 export default function Navbar() {
@@ -63,7 +64,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-         {/* Mostrar botón solo si l token no existe */}
+         {/* Mostrar botón solo si l token existe */}
         {token && (
          
           <CerrarSesion/>

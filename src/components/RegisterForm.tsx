@@ -64,7 +64,7 @@ export default function RegisterForm() {
   if (isResend) setResendSuccess(false);
 
   try {
-    const res = await fetch("https://localhost:7057/api/mail/send-verification", {
+    const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/mail/send-verification", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData.email),
@@ -91,7 +91,7 @@ export default function RegisterForm() {
 
   const verifyCode = async () => {
     try {
-      const res = await fetch("https://localhost:7057/api/mail/verify-code", {
+      const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/mail/verify-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: formData.email, code: verificationCode }),
@@ -138,7 +138,7 @@ export default function RegisterForm() {
         createdAt: new Date().toISOString(),
       };
 
-      const res = await fetch("https://localhost:7057/api/users", {
+      const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -171,7 +171,7 @@ export default function RegisterForm() {
     }
 
     try {
-      const res = await fetch("https://localhost:7057/api/client", {
+      const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/client", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -182,7 +182,7 @@ export default function RegisterForm() {
 
       if (!res.ok) throw new Error("Error al registrar como cliente");
 
-      const res2 = await fetch("https://localhost:7057/api/mail/send-welcome", {
+      const res2 = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/mail/send-welcome", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData.email),
@@ -317,14 +317,21 @@ export default function RegisterForm() {
             onChange={handleClienteChange}
             className="w-full border border-gray-300 text-black bg-amber-50 p-2 rounded"
           />
-          <input
-            type="number"
-            name="preferredBarberId"
-            placeholder="ID del barbero preferido"
-            value={clienteData.preferredBarberId}
-            onChange={handleClienteChange}
-            className="w-full border border-gray-300 text-black bg-amber-50 p-2 rounded"
-          />
+         <select
+  name="preferredBarberId"
+  value={clienteData.preferredBarberId}
+  onChange={(e) =>
+    setClienteData({
+      ...clienteData,
+      preferredBarberId: parseInt(e.target.value),
+    })
+  }
+  className="w-full border border-gray-300 text-black bg-amber-50 p-2 rounded"
+>
+  <option value={0}>Selecciona un barbero</option>
+  <option value={1}>Kevin</option>
+  <option value={2}>Miguel</option>
+</select>
           <input
             type="text"
             name="notes"
