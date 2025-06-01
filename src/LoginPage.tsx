@@ -2,7 +2,7 @@
 import Navbar from "./components/NavBar";
 
 import LoginForm from "./components/LoginForm";
-import FondoRegistro from "./assets/bCulturehero.png"; // fondo específico
+import FondoRegistro from "./assets/bCulturehero.png"; 
 
 export default function RegisterPage() {
   return (

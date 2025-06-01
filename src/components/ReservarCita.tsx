@@ -22,11 +22,12 @@ export const ReservarCita = () => {
     if (field === "serviceId") setServiceId(value);
   };
 
+  // Función para obtener la disponibilidad del barbero
   const fetchDisponibilidad = async () => {
     if (!barberId || !serviceId || !date) return;
      try {
     const res = await axios.get(
-      `http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/disponibility/${barberId}/availability`,
+      `http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/disponibility/${barberId}/availability`,
       { params: { date, serviceId } }
     );
     if (!res.data || res.data.length === 0) {
@@ -45,7 +46,8 @@ export const ReservarCita = () => {
   };
 
   
-
+  // Maneja el clic en un slot del calendario
+  // y reserva la cita
   const handleSlotClick = async (slot: any) => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     const token = localStorage.getItem("token");
@@ -64,7 +66,7 @@ export const ReservarCita = () => {
 
     console.log(cita);
 
-     await axios.post("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/appointments", cita, {
+     await axios.post("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/appointments", cita, {
       headers: { Authorization: `Bearer ${token}` }
     });
 
@@ -101,6 +103,7 @@ export const ReservarCita = () => {
    
   };
 
+  // Efecto para cargar la disponibilidad al cambiar barberId, serviceId o date
   useEffect(() => {
   if (barberId && serviceId && date) {
     fetchDisponibilidad();

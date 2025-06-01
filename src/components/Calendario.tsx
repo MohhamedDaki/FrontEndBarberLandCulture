@@ -27,6 +27,7 @@ export const CalendarioCitas = ({ citas, modo = "cliente", onStatusChange }: Pro
   const [eventos, setEventos] = useState<any[]>([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [eventoSeleccionado, setEventoSeleccionado] = useState<any>(null);
+  // Transforma las citas recibidas por props a objetos entendibles por FullCalendar
 
   useEffect(() => {
     const formatearEventos = citas.map((cita) => ({

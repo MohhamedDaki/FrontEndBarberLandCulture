@@ -38,7 +38,7 @@ export default function RegisterForm() {
 };
 
 const validatePassword = (password: string) => {
-  // Por ejemplo, mínimo 6 caracteres
+  // mínimo 6 caracteres
   return password.length >= 8;
 };
 
@@ -69,7 +69,7 @@ const validatePassword = (password: string) => {
       password: formData.password,
     };
 
-    const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/auth/login", {
+    const res = await fetch("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -82,7 +82,7 @@ const validatePassword = (password: string) => {
     setSuccess("Inicio de sesión exitoso");
 
     // Obtener los datos del usuario
-    const meRes = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/auth/me", {
+    const meRes = await fetch("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/auth/me", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${response.token}`,

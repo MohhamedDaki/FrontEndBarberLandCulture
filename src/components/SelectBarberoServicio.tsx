@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
+// Componente para seleccionar barbero y servicio
 export const SelectBarberoServicio = ({ onChange }: any) => {
   const [barberos, setBarberos] = useState([]);
   const [servicios, setServicios] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const b = await axios.get("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/users/barbers");
-      const s = await axios.get("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/services");
+      const b = await axios.get("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/users/barbers");
+      const s = await axios.get("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/services");
       setBarberos(b.data);
       setServicios(s.data);
     };

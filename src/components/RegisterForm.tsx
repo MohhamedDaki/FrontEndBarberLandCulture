@@ -58,13 +58,14 @@ export default function RegisterForm() {
     setClienteData({ ...clienteData, [e.target.name]: e.target.value });
   };
 
+  // Envía código de verificación al correo electrónico
  const sendVerificationCode = async (isResend = true) => {
   setResendingCode(true);
   setError("");
   if (isResend) setResendSuccess(false);
 
   try {
-    const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/mail/send-verification", {
+    const res = await fetch("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/mail/send-verification", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData.email),
@@ -88,10 +89,10 @@ export default function RegisterForm() {
   }
 };
 
-
+// Verifica el código de verificación ingresado por el usuario
   const verifyCode = async () => {
     try {
-      const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/mail/verify-code", {
+      const res = await fetch("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/mail/verify-code", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: formData.email, code: verificationCode }),
@@ -105,6 +106,7 @@ export default function RegisterForm() {
     }
   };
 
+  // Maneja el envío inicial del formulario
   const handleInitialSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -128,6 +130,7 @@ export default function RegisterForm() {
     await sendVerificationCode(false);
   };
 
+  // Crea el usuario en la base de datos
   const handleUserCreation = async () => {
     try {
       const payload = {
@@ -138,7 +141,7 @@ export default function RegisterForm() {
         createdAt: new Date().toISOString(),
       };
 
-      const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/users", {
+      const res = await fetch("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -154,6 +157,7 @@ export default function RegisterForm() {
     }
   };
 
+  // Envía los datos del cliente y finaliza el registro
   const handleClienteSubmit = async () => {
     if (!isValidPhone(clienteData.phone)) {
       setError("El teléfono debe tener entre 9 y 15 dígitos numéricos.");
@@ -171,7 +175,7 @@ export default function RegisterForm() {
     }
 
     try {
-      const res = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/client", {
+      const res = await fetch("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/client", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -182,7 +186,7 @@ export default function RegisterForm() {
 
       if (!res.ok) throw new Error("Error al registrar como cliente");
 
-      const res2 = await fetch("http://bculture.e3a6h6affcghaac7.spaincentral.azurecontainer.io:7057/api/mail/send-welcome", {
+      const res2 = await fetch("http://blaand.g6e4baczaeauetav.spaincentral.azurecontainer.io:7057/api/mail/send-welcome", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData.email),

@@ -7,7 +7,7 @@ export const CalendarioDisponibilidad = ({ eventos, onSlotClick, fechaSelecciona
   
  // Filtrar eventos cuyo inicio está en el futuro
   const eventosFuturos = eventos.filter((evento: any) => {
-    const inicio = new Date(evento.start); // asegúrate de que evento.start es una fecha válida
+    const inicio = new Date(evento.start); 
     return inicio > ahora;
   });
 
